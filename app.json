@@ -1,6 +1,7 @@
 {
   "expo": {
-
+  "name": "StoryUi",
+  "displayName": "StoryUi",
     "scheme": "storyUi"
   }
 }
