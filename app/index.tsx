@@ -1,9 +1,9 @@
 import Fas from '@components/fas'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import Screen1 from '@screens/Screen1'
+import Constants from 'expo-constants'
 
-export default function Page() {
+function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
@@ -15,6 +15,21 @@ export default function Page() {
   )
 }
 
+let AppEntryPoint = Page
+
+if (Constants?.expoConfig?.extra?.storybookEnabled === 'true') {
+  const StorybookUI = require('../.storybook').default
+  console.log('Storybook')
+  AppEntryPoint = () => {
+    return (
+      <View style={{ flex: 1 }}>
+        <StorybookUI />
+      </View>
+    )
+  }
+}
+
+export default AppEntryPoint
 const styles = StyleSheet.create({
   container: {
     flex: 1,
