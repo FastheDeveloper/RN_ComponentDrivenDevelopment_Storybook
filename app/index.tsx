@@ -1,7 +1,6 @@
 import Fas from '@components/fas'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import Screen1 from '@screens/Screen1'
 import Constants from 'expo-constants'
 
 function Page() {
