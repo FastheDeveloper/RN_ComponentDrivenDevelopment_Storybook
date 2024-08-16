@@ -9,12 +9,6 @@ function App() {
   );
 }
 
-let AppEntryPoint = App;
-
-if (Constants.expoConfig.extra.storybookEnabled === "true") {
-  AppEntryPoint = require("./.storybook").default;
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
