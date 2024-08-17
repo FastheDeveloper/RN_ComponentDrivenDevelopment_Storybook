@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import AppButton from './AppButton'
+import AppButton, { Titles } from './AppButton'
 import { FontAwesome } from '@expo/vector-icons'
 import React from 'react'
 import { View } from 'react-native'
@@ -12,7 +12,8 @@ const AppButtonMeta: Meta<typeof AppButton> = {
     onPress: { action: 'pressed the button' },
   },
   args: {
-    title: 'Story Button',
+    title: Titles.BLAND,
+    label: 'Story Button',
     loading: false,
     // leftIcon: <FontAwesome name={'paper-plane'} size={20} />,
     // rightIcon: <FontAwesome name={'user-circle-o'} size={20} />,
