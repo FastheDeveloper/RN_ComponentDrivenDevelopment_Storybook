@@ -1,7 +1,7 @@
-import Fas from '@components/fas'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import Constants from 'expo-constants'
+import Fas from '@components/testComps/fas'
 
 function Page() {
   return (
