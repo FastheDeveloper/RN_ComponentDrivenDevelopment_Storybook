@@ -1,5 +1,5 @@
 module.exports = function (api) {
-  api.cache(true);
+  api.cache(true)
   return {
     presets: ['babel-preset-expo'],
     plugins: [
@@ -9,6 +9,7 @@ module.exports = function (api) {
           root: ['.'],
           extensions: ['.ts', '.tsx', '.js', 'jsx', '.ios.js', '.android.js'],
           alias: {
+            '@/': '*',
             '@components': './components',
             '@screens': './src/screens',
             '@types': './src/lib/types',
@@ -17,5 +18,5 @@ module.exports = function (api) {
       ],
       'nativewind/babel',
     ],
-  };
-};
+  }
+}
