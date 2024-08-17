@@ -5,7 +5,7 @@ import AppButton from 'components/Button/AppButton'
 const OnboardingScreen = () => {
   return (
     <View>
-      <AppButton title="Get Started" />
+      <AppButton label="Get Started" />
     </View>
   )
 }

@@ -23,15 +23,34 @@
     "baseUrl": ".",
     "isolatedModules": true,
     "jsx": "react",
-    "types": ["jest"],
-    "lib": ["dom", "dom.iterable", "esnext", "es2017"],
+    "types": [
+      "jest"
+    ],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext",
+      "es2017"
+    ],
     "paths": {
-      "@/*":["*"],
-      "@components/*":["./components/*"],
-      "@screens/*": ["./src/screens/*"],
-      "@types/*": ["./src/lib/types"],
-      "@svg/*": ["./src/svg/*"],
-      "@constants/*": ["./src/constants/*"],
+      "@/*": [
+        "*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@screens/*": [
+        "./src/screens/*"
+      ],
+      "@types/*": [
+        "./src/lib/types"
+      ],
+      "@svg/*": [
+        "./src/svg/*"
+      ],
+      "@constants/*": [
+        "./src/constants/*"
+      ]
     },
     "moduleResolution": "node",
     "noEmit": true,
@@ -44,12 +63,16 @@
     "strict": true,
     "target": "esnext"
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts","declarations.d.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "declarations.d.ts"
+  ],
   "extends": "expo/tsconfig.base",
   "exclude": [
     "node_modules",
     "babel.config.js",
     "metro.config.js",
-    "jest.config.js",
+    "jest.config.js"
   ]
 }

@@ -7,10 +7,17 @@ type buttonProps = {
   loading?: boolean
   rightIcon?: React.ReactNode
   leftIcon?: React.ReactNode
-  title: string
+  title?: Titles
+  label: string
 } & ComponentProps<typeof Pressable>
 
-const AppButton = ({ title, disabled, loading, leftIcon, rightIcon, ...pressableProps }: buttonProps) => {
+export enum Titles {
+  BLAND = 'BLAND',
+  LEFT_ICON = 'LeftIcon',
+  RIGHT_ICON = 'RightIcon',
+}
+
+const AppButton = ({ title, disabled, loading, leftIcon, label, rightIcon, ...pressableProps }: buttonProps) => {
   const content = loading ? (
     <>
       <View style={styles.loaderWrapper}>
@@ -20,7 +27,7 @@ const AppButton = ({ title, disabled, loading, leftIcon, rightIcon, ...pressable
   ) : (
     <>
       {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
-      <Text style={styles.buttonText}>{title}</Text>
+      <Text style={styles.buttonText}>{label}</Text>
       {rightIcon && <View style={styles.rightIcon}>{rightIcon}</View>}
     </>
   )
