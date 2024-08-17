@@ -1,8 +1,8 @@
 export default ({ config }) => ({
   ...config,
-  name: "Storybook Tutorial Template",
-  slug: "storybook-tutorial-template",
+  name: 'Storybook Component Driven Dev',
+  slug: 'Storybook Component Driven Dev',
   extra: {
     storybookEnabled: process.env.STORYBOOK_ENABLED,
   },
-});
+})

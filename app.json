@@ -1,7 +1,10 @@
 {
   "expo": {
-  "name": "StoryUi",
-  "displayName": "StoryUi",
-    "scheme": "storyUi"
+  "name": "Storybook Component Driven Dev",
+  "displayName": "Storybook Component Driven Dev",
+    "scheme": "storyUi",
+    "experiments": {
+         "tsconfigPaths": true
+        }
   }
 }

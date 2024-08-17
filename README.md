@@ -44,6 +44,119 @@ Before diving in, make sure you have:
 6. Building a Robust Component Library
 7. Best Practices and Pro Tips
 
+## Getting Started
+
+### Using My Repository
+
+To quickly get started with the pre-configured environment, follow these steps:
+
+1. Clone the repository using:
+    ```shell
+        git clone https://github.com/FastheDeveloper/RN_ComponentDrivenDevelopment_Storybook.git
+    ```
+
+2. Navigate to the project directory and install the dependencies by running:
+    ```shell
+        yarn
+    
+    # or
+
+        npm install
+    ```
+
+### Setting Up from Scratch
+
+
+1. Creating your expo react native application:
+    ```shell
+        npx create-expo-stack@latest
+    ```
+    Running the above command will create a boilerplate application after asking a few configuration questions.
+    
+    <!-- ![Console Setup](./tutorialImages/setupImage.png) -->
+    <img alt="Console Setup" src="./tutorialImages/setupImage.png" width="700" />
+
+    <br/>
+
+2. Setup Storybook In The Project
+
+    ```shell
+        npx storybook@latest init
+    ```
+    This will add a new folder (.storybook) in your project directory
+    <br/>
+    <br/>
+    <img alt="Console Setup" src="./tutorialImages/Storyfolder.png" width="400" />
+
+<br/>
+
+3. Additional Configuration
+
+    1. Create an app.config.js File:
+
+    This configuration facilitates easy switching between Storybook UI for testing and the actual React Native application.
+    <br/>
+    This file defines the storybookEnabled constant based on the environment variable STORYBOOK_ENABLED. This helps determine whether to render Storybook or the main application.
+
+    ```javascript
+    
+    export default ({ config }) => ({
+        ...config,
+        name: 'My_App_Name',  
+        slug: 'My_App_Name', 
+        extra: {
+            storybookEnabled: process.env.STORYBOOK_ENABLED,
+        },
+    });
+    ```
+
+    2. Update package.json File:
+
+    In the package.json file, add these Storybook scripts. We use these to pass that environment variable to our application, which swaps the entry point to the Storybook UI using cross-env to make sure this works on all platforms (Windows/macOS/Linux).
+
+
+    ```json
+    {
+        "scripts": {
+            "storybook": "cross-env STORYBOOK_ENABLED='true' expo start",
+            "storybook:ios": "cross-env STORYBOOK_ENABLED='true' expo ios",
+            "storybook:android": "cross-env STORYBOOK_ENABLED='true' expo android"
+        }
+    }
+    ```
+
+4. Run the App for Testing:
+
+    To test the app, you can use one of the following commands depending on your target platform:
+
+    ```shell 
+        # Run on iOS
+        yarn ios
+    
+    # or 
+    
+        # Run on Android
+        yarn android
+    ```
+
+5. Run Storybook  to test :
+    ```shell 
+        # Run on iOS
+        yarn storybook:ios
+    
+    # or 
+    
+        # Run on Android
+        yarn storybook:android
+    ```
+   
+<br/>
+<br/>
+
+<br/>
+<br/>
+
+
 ## 🤝 Contributing
 
 We welcome contributions to enhance this tutorial. Feel free to submit issues or pull requests.
@@ -57,6 +170,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - Expo team for their stellar documentation
 - Storybook community for their comprehensive guides
 - React Native community for their ongoing support
+
 
 ## 🚧 Work in Progress
 
