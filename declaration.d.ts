@@ -1,2 +1,2 @@
 /// <reference types="nativewind/types" />
-declare module '*'
+// declare module '*'

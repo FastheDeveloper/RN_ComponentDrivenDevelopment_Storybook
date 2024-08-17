@@ -1,6 +1,6 @@
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { ComponentProps } from 'react'
-import { APP_COLOR } from 'src/constants/colorConstants'
+import { APP_COLOR } from '@constants/colorConstants'
 
 type buttonProps = {
   disabled?: boolean

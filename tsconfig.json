@@ -26,9 +26,12 @@
     "types": ["jest"],
     "lib": ["dom", "dom.iterable", "esnext", "es2017"],
     "paths": {
-      "@components":["/components/*"],
-      "@screens": ["/src/screens/*"],
-      "@types": ["/src/lib/types"],
+      "@/*":["*"],
+      "@components/*":["./components/*"],
+      "@screens/*": ["./src/screens/*"],
+      "@types/*": ["./src/lib/types"],
+      "@svg/*": ["./src/svg/*"],
+      "@constants/*": ["./src/constants/*"],
     },
     "moduleResolution": "node",
     "noEmit": true,
@@ -41,6 +44,7 @@
     "strict": true,
     "target": "esnext"
   },
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts","declarations.d.ts"],
   "extends": "expo/tsconfig.base",
   "exclude": [
     "node_modules",
