@@ -2,14 +2,14 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import Constants from 'expo-constants'
 import Fas from '@components/testComps/fas'
+import AppButton from 'components/Button/AppButton'
+import OnboardingScreen from 'src/screens/OnboardingScreen'
 
 function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text className="text-black">Hello World</Text>
-        <Fas />
-        <Text className="text-white">This is the first page of your app.</Text>
+        <OnboardingScreen />
       </View>
     </View>
   )
@@ -22,7 +22,7 @@ if (Constants?.expoConfig?.extra?.storybookEnabled === 'true') {
   console.log('Storybook')
   AppEntryPoint = () => {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: 'red' }}>
         <StorybookUI />
       </View>
     )
@@ -33,14 +33,15 @@ export default AppEntryPoint
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    padding: 24,
+    // alignItems: 'center',
+    // padding: 24,
+    paddingHorizontal: 30,
   },
   main: {
     flex: 1,
     justifyContent: 'center',
-    maxWidth: 960,
-    marginHorizontal: 'auto',
+    // maxWidth: 960,
+    // marginHorizontal: 'auto',
   },
   title: {
     fontSize: 64,

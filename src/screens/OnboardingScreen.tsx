@@ -1,16 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-// import Fas from '@components/testComps/fas'
+import AppButton from 'components/Button/AppButton'
 
-const Screen1 = () => {
+const OnboardingScreen = () => {
   return (
     <View>
-      <Text>Screen1</Text>
-      {/* <Fas/> */}
+      <AppButton title="Get Started" />
     </View>
   )
 }
 
-export default Screen1
+export default OnboardingScreen
 
 const styles = StyleSheet.create({})

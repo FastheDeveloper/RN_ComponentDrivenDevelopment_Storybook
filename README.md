@@ -125,7 +125,42 @@ To quickly get started with the pre-configured environment, follow these steps:
     }
     ```
 
-4. Run the App for Testing:
+4. Setup Entry point (/app/index.tsx) with the env variable
+
+    ```javascript
+    import React from 'react'
+    import { StyleSheet, Text, View } from 'react-native'
+    import Constants from 'expo-constants'
+
+
+    function Page() {
+    return (
+        <View style={styles.container}>
+        <View style={styles.main}>
+            <Text className="text-white">This is the first page of your app.</Text>
+        </View>
+        </View>
+    )
+    }
+
+    let AppEntryPoint = Page  
+
+    if (Constants?.expoConfig?.extra?.storybookEnabled === 'true') {
+    const StorybookUI = require('../.storybook').default
+    AppEntryPoint = () => {
+        return (
+        <View style={{ flex: 1 }}>
+            <StorybookUI />
+        </View>
+        )
+    }
+    }
+
+    export default AppEntryPoint
+
+    ```
+
+5. Run the App for Testing:
 
     To test the app, you can use one of the following commands depending on your target platform:
 
@@ -139,7 +174,7 @@ To quickly get started with the pre-configured environment, follow these steps:
         yarn android
     ```
 
-5. Run Storybook  to test :
+6. Run Storybook  to test :
     ```shell 
         # Run on iOS
         yarn storybook:ios
