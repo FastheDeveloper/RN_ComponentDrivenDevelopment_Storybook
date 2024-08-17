@@ -4,7 +4,7 @@ import React from 'react'
 const Fas = () => {
   return (
     <View>
-      <Text className="text-lg">Fash</Text>
+      <Text className="text-lg">Fasthecreator</Text>
     </View>
   )
 }
