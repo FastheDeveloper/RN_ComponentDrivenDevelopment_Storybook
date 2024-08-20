@@ -1,38 +1,58 @@
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { ComponentProps } from 'react'
 import { APP_COLOR } from '@constants/colorConstants'
-
+import { FontAwesome } from '@expo/vector-icons'
 type buttonProps = {
   disabled?: boolean
   loading?: boolean
-  rightIcon?: React.ReactNode
-  leftIcon?: React.ReactNode
-  title?: Titles
+  rightIcon?: keyof typeof FontAwesome.glyphMap
+  leftIcon?: keyof typeof FontAwesome.glyphMap
   label: string
 } & ComponentProps<typeof Pressable>
 
-export enum Titles {
-  BLAND = 'BLAND',
-  LEFT_ICON = 'LeftIcon',
-  RIGHT_ICON = 'RightIcon',
-}
-
-const AppButton = ({ title, disabled, loading, leftIcon, label, rightIcon, ...pressableProps }: buttonProps) => {
+const AppButton = ({ disabled, loading, leftIcon, label, rightIcon, ...pressableProps }: buttonProps) => {
   const content = loading ? (
     <>
-      <View style={styles.loaderWrapper}>
+      <View
+        // style={styles.loaderWrapper}
+        className="justify-center h-6"
+      >
         <ActivityIndicator size="small" color={'white'} animating={true} />
       </View>
     </>
   ) : (
     <>
-      {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
-      <Text style={styles.buttonText}>{label}</Text>
-      {rightIcon && <View style={styles.rightIcon}>{rightIcon}</View>}
+      {leftIcon && (
+        <View
+          // style={styles.leftIcon}
+          className="absolute left-5"
+        >
+          <FontAwesome name={leftIcon} size={20} />
+        </View>
+      )}
+      <Text
+        // style={styles.buttonText}
+        className="text-APP_COLOR-MAIN_WHITE text-center text-lg font-bold "
+      >
+        {label}
+      </Text>
+      {rightIcon && (
+        <View
+          // style={styles.rightIcon}
+          className="absolute right-5"
+        >
+          <FontAwesome name={rightIcon} size={20} />
+        </View>
+      )}
     </>
   )
   return (
-    <Pressable style={styles.button} {...pressableProps} testID="testClick">
+    <Pressable
+      // style={styles.button}
+      className="w-full flex justify-center  item-center bg-APP_COLOR-MAIN_GREEN rounded-3xl p-4 shadow-lg"
+      {...pressableProps}
+      testID="testClick"
+    >
       {content}
     </Pressable>
   )
