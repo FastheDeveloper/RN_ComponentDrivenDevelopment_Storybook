@@ -2,6 +2,7 @@ import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-nati
 import React, { ComponentProps } from 'react'
 import { APP_COLOR } from '@constants/colorConstants'
 import { FontAwesome } from '@expo/vector-icons'
+
 type buttonProps = {
   disabled?: boolean
   loading?: boolean

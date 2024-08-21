@@ -74,7 +74,7 @@ To quickly get started with the pre-configured environment, follow these steps:
     Running the above command will create a boilerplate application after asking a few configuration questions.
     
     <!-- ![Console Setup](./tutorialImages/setupImage.png) -->
-    <img alt="Console Setup" src="./tutorialImages/setupImage.png" width="700" />
+    <img alt="Console Setup" src="./tutorialMedia/setupImage.png" width="700" />
 
     <br/>
 
@@ -86,7 +86,7 @@ To quickly get started with the pre-configured environment, follow these steps:
     This will add a new folder (.storybook) in your project directory
     <br/>
     <br/>
-    <img alt="Console Setup" src="./tutorialImages/Storyfolder.png" width="400" />
+    <img alt="Console Setup" src="./tutorialMedia/Storyfolder.png" width="400" />
 
 <br/>
 
@@ -191,7 +191,274 @@ To quickly get started with the pre-configured environment, follow these steps:
 <br/>
 <br/>
 
+## Creating a Dynamic Button Compononent
+### Create Button with StyleSheet/Tailwind css, adding Jest testID to the pressable
+```javascript
+        import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native'
+        import React, { ComponentProps } from 'react'
+        import { APP_COLOR } from '@constants/colorConstants'
+        import { FontAwesome } from '@expo/vector-icons'
 
+        type buttonProps = {
+        disabled?: boolean
+        loading?: boolean
+        rightIcon?: keyof typeof FontAwesome.glyphMap
+        leftIcon?: keyof typeof FontAwesome.glyphMap
+        label: string
+        } & ComponentProps<typeof Pressable>
+
+        const AppButton = ({ disabled, loading, leftIcon, label, rightIcon, ...pressableProps }: buttonProps) => {
+        const content = loading ? (
+            <>
+            <View
+            
+            // style={styles.loaderWrapper}
+             className="justify-center h-6"
+             >
+                <ActivityIndicator size="small" color={'white'} animating={true} />
+            </View>
+            </>
+        ) : (
+            <>
+            {leftIcon && (
+                <View 
+                //style={styles.leftIcon}
+                className="absolute left-5"
+                >
+                <FontAwesome name={leftIcon} size={20} />
+                </View>
+            )}
+            <Text 
+            className="text-APP_COLOR-MAIN_WHITE text-center text-lg font-bold "
+            //style={styles.buttonText}
+            >
+                {label}
+            </Text>
+            {rightIcon && (
+                <View 
+               // style={styles.rightIcon}
+                className="absolute right-5"
+                >
+                <FontAwesome name={rightIcon} size={20} />
+                </View>
+            )}
+            </>
+        )
+        return (
+            <Pressable
+            //style={styles.button}
+            className="w-full flex justify-center  item-center bg-APP_COLOR-MAIN_GREEN rounded-3xl p-4 shadow-lg"
+            {...pressableProps}
+            testID="testClick"
+            >
+            {content}
+            </Pressable>
+        )
+        }
+
+        export default AppButton
+
+        const styles = StyleSheet.create({
+            button: {
+                alignItems: 'center',
+                backgroundColor: APP_COLOR.MAIN_GREEN,
+                borderRadius: 24,
+                elevation: 5,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                padding: 16,
+                width: '100%',
+                shadowColor: '#000',
+                shadowOffset: {
+                height: 2,
+                width: 0,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+            },
+            buttonText: {
+                color: APP_COLOR.MAIN_WHITE,
+                fontSize: 18,
+                fontWeight: '700',
+                textAlign: 'center',
+            },
+            loaderWrapper: {
+                height: 24,
+                justifyContent: 'center',
+            },
+            rightIcon: {
+                position: 'absolute',
+                right: 20,
+            },
+            leftIcon: {
+                position: 'absolute',
+                left: 20,
+            },
+        })
+
+```
+
+### Creating Default Button Story
+In our story files, we use a syntax called Component Story Format (CSF). In this case, we are using CSF3, which is a newer, updated version of CSF supported by the latest versions of Storybook. This version of CSF has significantly less boilerplate, making it easier to get started.
+In Storybook, there are two basic levels of organization: the component and its child stories. Each story can be thought of as a permutation of a component. You can have as many stories per component as needed.
+
+```shell
+    * Component
+        * Story
+        * Story
+        * Story
+```
+To introduce the component we are documenting, we create a default export that contains:
+
+- component - the component itself
+- title - how to refer to the component in the Storybook app's sidebar
+- argTypes - allows us to specify the types of our args, here we use it to define actions that will log whenever that interaction takes place
+
+    ```javascript
+        import type { Meta, StoryObj } from '@storybook/react'
+
+        import AppButton from './AppButton'
+
+        import React from 'react'
+        import { View } from 'react-native'
+
+        const AppButtonMeta: Meta<typeof AppButton> = {
+        title: 'Button',
+        component: AppButton,
+        argTypes: {
+            onPress: { action: 'pressed the button' },
+        },
+        args: {
+            label: 'Story Button',
+            loading: false,
+        },
+        decorators: [
+            (Story) => (
+            <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+                <Story />
+            </View>
+            ),
+        ],
+        }
+
+        export default AppButtonMeta
+
+        export const Default: StoryObj<typeof AppButton> = {}
+    ```
+In this example, we create a new default story, which tells Storybook that:
+- The name in the sidebar should be "Button"
+- The component it should be attached to is AppButton
+- The default label should be "Story Button"
+- The default loading state should be false
+- The onPress action should run the 'pressed the button' action
+
+    <video width="320" height="100%" controls>
+        <source src="./tutorialMedia/ButtonStory.mp4" type="video/mp4">     
+    </video>
+
+### Creating Various Button Stories
+
+```javascript
+        export const TextOnlyButton: StoryObj<typeof AppButton> = {
+        args: {
+            label: 'Text Button',
+        },
+        argTypes: {
+            onPress: { action: 'Yaay' },
+        },
+        parameters: {
+            noBackground: true,
+        },
+        }
+
+        export const WithLeftIcon: StoryObj<typeof AppButton> = {
+        args: {
+            label: 'With Left Icon',
+            leftIcon: 'paper-plane',
+        },
+        argTypes: {
+            onPress: { action: 'Lefty Pressed' },
+        },
+        parameters: {
+            noBackground: true,
+        },
+        }
+
+        export const WithRightIcon: StoryObj<typeof AppButton> = {
+        args: {
+            label: 'With Right Icon',
+            rightIcon: 'user-circle-o',
+        },
+        argTypes: {
+            onPress: { action: 'Righty Pressed' },
+        },
+        parameters: {
+            noBackground: true,
+        },
+        }
+
+        export const WithBothIcons: StoryObj<typeof AppButton> = {
+        args: {
+            label: 'With Both Icons',
+            rightIcon: 'user-circle-o',
+            leftIcon: 'paper-plane',
+        },
+        argTypes: {
+            onPress: { action: 'Bothy Pressed' },
+        },
+        parameters: {
+            noBackground: true,
+        },
+        }
+
+```
+
+  <video width="320" height="100%" controls>
+        <source src="./tutorialMedia/AllButtons.mp4" type="video/mp4">     
+    </video>
+
+### Creating the Jest Test
+
+```javascript
+    import React from 'react'
+
+    import { render, fireEvent } from '@testing-library/react-native'
+    import AppButton from '@/components/Button/AppButton'
+
+    describe('MyButtons', () => {
+    it('calls Unpressed when clicked', () => {
+        const mockOnPress = jest.fn()
+        const { getByTestId } = render(<AppButton label="Test" onPress={mockOnPress} />)
+        const pressMeButton = getByTestId('testClick')
+        fireEvent.press(pressMeButton)
+
+        expect(mockOnPress).toHaveBeenCalled()
+    })
+    })
+
+```
+1. Test Suite Setup:
+    -  We define a test suite named AppButton Component using describe. This groups together related tests for the AppButton component.
+    
+2. Test Case Definition:
+    - Inside the test suite, there is a single test case defined using the it function. The test case is titled "calls Unpressed when clicked".
+3. Mock Function Creation:
+    - We create a mock function mockOnPress using jest.fn(). This mock function simulates the onPress prop of the AppButton component to test if it gets called when the button is pressed.
+4. Rendering the Component:
+    - We render the AppButton component with a label prop set to "Test" and the onPress prop set to mockOnPress using the render function from @testing-library/react-native.
+5. Simulating User Interaction:
+    - We retrieve the button element using getByTestId with the test ID "testClick".
+    We simulate a press event on the button element using fireEvent.press
+6. Verifying Behavior:
+    - We assert that the mockOnPress function has been called using expect(mockOnPress).toHaveBeenCalled(). This confirms that the onPress prop function was triggered when the button was pressed.
+
+### Running the Jest Test
+ ```shell
+    yarn test
+ ```
+To execute the test case, use the above command:
+    <img alt="Console Setup" src="./tutorialMedia/testCase.jpg" width="400" />
+ 
 ## 🤝 Contributing
 
 We welcome contributions to enhance this tutorial. Feel free to submit issues or pull requests.

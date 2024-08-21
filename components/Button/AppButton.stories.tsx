@@ -14,8 +14,6 @@ const AppButtonMeta: Meta<typeof AppButton> = {
   args: {
     label: 'Story Button',
     loading: false,
-    // leftIcon: <FontAwesome name={'paper-plane'} size={20} />,
-    // rightIcon: <FontAwesome name={'user-circle-o'} size={20} />,
   },
   decorators: [
     (Story) => (
@@ -27,6 +25,8 @@ const AppButtonMeta: Meta<typeof AppButton> = {
 }
 
 export default AppButtonMeta
+
+export const Default: StoryObj<typeof AppButton> = {}
 
 export const TextOnlyButton: StoryObj<typeof AppButton> = {
   args: {
@@ -59,7 +59,7 @@ export const WithRightIcon: StoryObj<typeof AppButton> = {
     rightIcon: 'user-circle-o',
   },
   argTypes: {
-    onPress: { action: 'Lefty Pressed' },
+    onPress: { action: 'Righty Pressed' },
   },
   parameters: {
     noBackground: true,
@@ -73,7 +73,7 @@ export const WithBothIcons: StoryObj<typeof AppButton> = {
     leftIcon: 'paper-plane',
   },
   argTypes: {
-    onPress: { action: 'Lefty Pressed' },
+    onPress: { action: 'Bothy Pressed' },
   },
   parameters: {
     noBackground: true,

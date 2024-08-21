@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import Constants from "expo-constants";
-
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs();
 function App() {
   return (
     <View style={styles.container}>
