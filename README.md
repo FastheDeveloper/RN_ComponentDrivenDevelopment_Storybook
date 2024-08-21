@@ -458,7 +458,7 @@ In this example, we create a new default story, which tells Storybook that:
  ```
 To execute the test case, use the above command:
     <img alt="Console Setup" src="./tutorialMedia/testCase.jpg" width="400" />
-
+ 
 ## 🤝 Contributing
 
 We welcome contributions to enhance this tutorial. Feel free to submit issues or pull requests.
