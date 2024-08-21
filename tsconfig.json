@@ -67,7 +67,7 @@
     "**/*.ts",
     "**/*.tsx",
     "declarations.d.ts"
-  ],
+, "components/TaskList/Tasklist.jsx", "components/TaskList/LoadingRow.jsx"  ],
   "extends": "expo/tsconfig.base",
   "exclude": [
     "node_modules",
