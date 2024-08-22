@@ -14,7 +14,7 @@ React Native • TypeScript • Expo • Expo Router • StoryBook • Jest
 
 ## 🚀 Introduction
 
-Welcome to this comprehensive, beginner-friendly guide on component-driven development using Storybook UI in React Native. This tutorial leverages the power of Expo and Expo Router to provide a robust learning experience.
+Welcome to this comprehensive, beginner-friendly guide on component-driven development using Storybook UI in React Native. This tutorial leverages the power of Expo, Tailwind and Storybook to provide a robust learning experience.
 
 ## 🎯 What You'll Learn
 
@@ -29,7 +29,7 @@ Welcome to this comprehensive, beginner-friendly guide on component-driven devel
 
 Before diving in, make sure you have:
 
-- A basic understanding of JavaScript and React Native
+- A basic understanding of JavaScript, Typescript and React Native
 - Node.js and npm installed on your development machine
 - Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions
 - Your preferred code editor ready to go
@@ -50,7 +50,7 @@ Before diving in, make sure you have:
    - Creating Various TextInput Stories
    - Writing Jest Tests for the TextInput Component
 6. **Testing Your Components**
-7. **Component Examples**
+7. **More Component Examples**
 
 ## Introduction to Component-Driven Development in React Native
 
