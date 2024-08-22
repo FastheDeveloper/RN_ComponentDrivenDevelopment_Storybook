@@ -33,9 +33,10 @@ export default AppEntryPoint
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // backgroundColor: 'green',
     // alignItems: 'center',
     // padding: 24,
-    paddingHorizontal: 30,
+    // paddingHorizontal: 15,
   },
   main: {
     flex: 1,
