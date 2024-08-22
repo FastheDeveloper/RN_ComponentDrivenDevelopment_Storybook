@@ -42,7 +42,7 @@ export const RightIconInput: StoryObj<typeof InputField> = {
   },
 }
 
-export const SafetyRightIconWithSecureEntryInput: StoryObj<typeof InputField> = {
+export const SafetyIconWithSecure: StoryObj<typeof InputField> = {
   args: {
     rightIcon: 'star',
     secureTextEntry: true,

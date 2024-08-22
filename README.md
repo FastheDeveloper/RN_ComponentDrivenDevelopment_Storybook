@@ -20,29 +20,74 @@ Welcome to this comprehensive, beginner-friendly guide on component-driven devel
 
 1. Core principles of component-driven development
 2. Harnessing Storybook UI to enhance your development workflow
-3. Bootstrapping a React Native project with Expo
+3. Bootstrapping a React Native project with Tailwind
 4. Seamlessly integrating Storybook UI into your Expo project
-5. Implementing smooth navigation with Expo Router
-6. Crafting and showcasing reusable components
-7. Industry best practices for component-driven development
+5. Crafting and showcasing reusable components
+6. Industry best practices for component-driven development
 
 ## 🛠 Prerequisites
 
 Before diving in, make sure you have:
 
-- A basic understanding of JavaScript and React
+- A basic understanding of JavaScript and React Native
 - Node.js and npm installed on your development machine
+- Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions
 - Your preferred code editor ready to go
 
 ## 📚 Tutorial Sections
 
-1. Introduction to Component-Driven Development
-2. Setting Up Your Expo Project
-3. Integrating Storybook UI
-4. Creating Your First Component
-5. Navigating with Expo Router
-6. Building a Robust Component Library
-7. Best Practices and Pro Tips
+1. **Introduction to Component-Driven Development**
+2. **Setting Up Your Expo Project**
+3. **Integrating Storybook UI**
+4. **Creating Your First Component**
+   - Crafting a Dynamic Button Component
+   - Creating a Default Button Story
+   - Creating Various Button Stories
+   - Writing Jest Tests for the Button Component
+5. **Creating a Dynamic TextInput Component**
+   - Crafting a TextInput with Tailwind CSS
+   - Creating a Default TextInput Story
+   - Creating Various TextInput Stories
+   - Writing Jest Tests for the TextInput Component
+6. **Testing Your Components**
+7. **Component Examples**
+
+## Introduction to Component-Driven Development in React Native
+
+Component-Driven Development (CDD) is an approach to building user interfaces that emphasizes creating applications from the "bottom up" using reusable components. This methodology is particularly well-suited for React Native development, given the framework's component-based architecture.
+
+### What is Component-Driven Development?
+
+CDD is a development methodology that focuses on building user interfaces by breaking them down into smaller, reusable components. These components are developed in isolation before being assembled into larger features and, ultimately, complete pages or screens.
+
+Key principles of CDD include:
+
+1. **Modularity**: Building UIs from discrete, reusable components.
+2. **Isolation**: Developing and testing components independently.
+3. **Composition**: Combining smaller components to create larger ones.
+4. **Reusability**: Designing components for use across different parts of an application.
+
+## Benefits for React Native Developers
+
+Adopting CDD in React Native development offers several advantages:
+
+1. **Improved Maintainability**: Smaller, self-contained components are easier to understand, update, and debug.
+2. **Enhanced Reusability**: Well-designed components can be reused across different parts of your app or even in different projects.
+3. **Easier Collaboration**: Teams can work on different components simultaneously without conflicts.
+4. **Consistent Design**: Using a library of standard components ensures UI consistency throughout the app.
+5. **Efficient Testing**: Components can be tested in isolation, making it easier to write and maintain unit tests.
+
+## Implementing CDD in React Native
+
+To implement CDD in your React Native project:
+
+1. **Start Small**: Begin by identifying and building the smallest, most basic UI elements (buttons, inputs, etc.).
+2. **Build a Component Library**: Create a collection of reusable components that can be shared across your application.
+3. **Use Tools**: Leverage tools like Storybook to develop and showcase your components in isolation.
+4. **Document Components**: Provide clear documentation for each component, including its props, usage examples, and any limitations.
+5. **Test Components**: Write unit tests for each component to ensure they function correctly in isolation.
+
+By adopting CDD, React Native developers can create more maintainable, scalable, and consistent mobile applications. This approach aligns well with React Native's philosophy and can significantly improve development efficiency and code quality.
 
 ## Getting Started
 
@@ -191,7 +236,7 @@ To quickly get started with the pre-configured environment, follow these steps:
 <br/>
 <br/>
 
-## Creating a Dynamic Button Compononent
+## Creating a Dynamic Button Component
 ### Create Button with StyleSheet/Tailwind css, adding Jest testID to the pressable
 ```javascript
         import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native'
@@ -457,8 +502,223 @@ In this example, we create a new default story, which tells Storybook that:
     yarn test
  ```
 To execute the test case, use the above command:
+<br/>
+<br/>
     <img alt="Console Setup" src="./tutorialMedia/testCase.jpg" width="400" />
  
+## Creating a Dynamic TextInput Component
+### Create Textinput with Tailwind css, adding Jest testID 
+```javascript
+        import { Pressable, Text, TextInput, View } from 'react-native'
+        import React, { ComponentProps, useState } from 'react'
+        import { FontAwesome } from '@expo/vector-icons'
+
+        type buttonProps = {
+        rightIcon?: keyof typeof FontAwesome.glyphMap
+        leftIcon?: keyof typeof FontAwesome.glyphMap
+        label?: string
+        } & ComponentProps<typeof TextInput>
+
+        const InputField = ({ leftIcon, label, rightIcon, ...inputProps }: buttonProps) => {
+        const [hide, setHide] = useState(true)
+        return (
+            <View className="mx-2">
+            <Text className="text-lg font-bold mb-2">{label}</Text>
+
+            <View className="flex-row justify-between items-center bg-APP_COLOR-MAIN_WHITE w-full  mt-2 rounded-xl shadow-xl border border-APP_COLOR-MAIN_GREY ">
+                {leftIcon && (
+                <View className="ml-2" testID="left-icon">
+                    <FontAwesome name={leftIcon} size={20} />
+                </View>
+                )}
+
+                <TextInput
+                className={`h-[52px] w-[85%] px-[2%]  `}
+                {...inputProps}
+                secureTextEntry={inputProps.secureTextEntry && !rightIcon ? hide : undefined}
+                testID="text-input"
+                />
+
+                {(rightIcon || inputProps.secureTextEntry) && (
+                <View className="mr-2" testID="right-icon">
+                    <Pressable onPress={() => (rightIcon ? null : setHide(!hide))} testID="passwordTest">
+                    <FontAwesome
+                        name={rightIcon || (inputProps.secureTextEntry && (hide ? 'eye' : 'eye-slash')) || undefined}
+                        size={20}
+                    />
+                    </Pressable>
+                </View>
+                )}
+            </View>
+            </View>
+        )
+        }
+
+        export default InputField
+
+```
+
+
+
+
+### Creating Default TextInput Story
+```javascript
+        import type { Meta, StoryObj } from '@storybook/react'
+
+        import React from 'react'
+        import { View } from 'react-native'
+        import InputField from './InputField'
+
+        const InputFieldMeta: Meta<typeof InputField> = {
+        title: 'Input Field',
+        component: InputField,
+        argTypes: {},
+        args: {
+            label: 'Story Input',
+        },
+        decorators: [
+            (Story) => (
+            <View style={{ justifyContent: 'center', flex: 1 }}>
+                <Story />
+            </View>
+            ),
+        ],
+        }
+
+        export default InputFieldMeta
+
+        export const Default: StoryObj<typeof InputField> = {}
+```
+In this example, we create a new default story, which tells Storybook that:
+- The name in the sidebar should be "Input Field"
+- The component it should be attached to is InputField
+- The default label should be "Story Input"
+
+
+    <video width="320" height="100%" controls>
+        <source src="./tutorialMedia/DefaultText.mp4" type="video/mp4">     
+    </video>
+
+### Creating Various Textinput Stories
+```javascript
+        export const PasswordInput: StoryObj<typeof InputField> = {
+        args: {
+            secureTextEntry: true,
+        },
+        }
+
+        export const LeftIconInput: StoryObj<typeof InputField> = {
+        args: {
+            leftIcon: 'user-circle',
+        },
+        }
+
+        export const RightIconInput: StoryObj<typeof InputField> = {
+        args: {
+            rightIcon: 'star',
+        },
+        }
+
+        export const SafetyIconWithSecureEntry: StoryObj<typeof InputField> = {
+        args: {
+            rightIcon: 'star',
+            secureTextEntry: true,
+        },
+        }
+
+```
+
+
+- Play tutorial video
+    <video width="320" height="100%" controls>
+        <source src="./tutorialMedia/AllTextInput.mp4" type="video/mp4">     
+    </video>
+
+### Creating the Jest Test
+```javascript
+        import React from 'react'
+        import { render, fireEvent } from '@testing-library/react-native'
+        import InputField from '@/components/InputField/InputField'
+    
+
+        describe('InputField', () => {
+        it('renders correctly with label', () => {
+            const { getByText } = render(<InputField label="Test Label" />)
+            expect(getByText('Test Label')).toBeTruthy()
+        })
+
+        it('renders left icon when provided', () => {
+            const { getByTestId } = render(<InputField leftIcon="user" />)
+            expect(getByTestId('left-icon')).toBeTruthy()
+        })
+
+        it('renders right icon when provided', () => {
+            const { getByTestId } = render(<InputField rightIcon="lock" />)
+            expect(getByTestId('right-icon')).toBeTruthy()
+        })
+
+        it('toggles password visibility when secureTextEntry is true', () => {
+            const { getByTestId } = render(<InputField secureTextEntry />)
+            const passwordToggle = getByTestId('passwordTest')
+            const input = getByTestId('text-input')
+
+            expect(input.props.secureTextEntry).toBe(true)
+            fireEvent.press(passwordToggle)
+            expect(input.props.secureTextEntry).toBe(false)
+            fireEvent.press(passwordToggle)
+            expect(input.props.secureTextEntry).toBe(true)
+        })
+
+        it('passes additional props to TextInput', () => {
+            const { getByTestId } = render(<InputField placeholder="Enter text" />)
+            const input = getByTestId('text-input')
+            expect(input.props.placeholder).toBe('Enter text')
+        })
+        })
+
+```
+
+## Testing
+
+This component is tested using Jest and React Native Testing Library. The tests cover various aspects of the InputField component's functionality:
+
+1. **Rendering with label**: 
+   Ensures that the component correctly renders the provided label text.
+
+2. **Left icon rendering**: 
+   Verifies that the left icon is displayed when the `leftIcon` prop is provided.
+
+3. **Right icon rendering**: 
+   Checks if the right icon is shown when the `rightIcon` prop is given.
+
+4. **Password visibility toggle**: 
+   Tests the functionality of toggling password visibility when `secureTextEntry` is true. It verifies that:
+   - The input is initially secure (password hidden)
+   - Pressing the toggle button makes the input visible
+   - Pressing the toggle button again makes the input secure
+
+5. **Prop passing**: 
+   Confirms that additional props (like `placeholder`) are correctly passed to the TextInput component.
+
+The tests use `render` from React Native Testing Library to render the component, and `fireEvent` to simulate user interactions. `getByText` and `getByTestId` are used to query elements in the rendered component.
+
+### Running the Jest Test
+ ```shell
+    yarn test
+ ```
+To execute the test case, use the above command:
+<br/>
+<br/>
+    <img alt="Console Setup" src="./tutorialMedia/inputTestCase.png" width="400" />
+ 
+### Component Examples
+
+For a more comprehensive understanding of how to use this component and to explore additional implementations, please refer to the `component` folder in the project directory. This folder contains various examples that demonstrate different use cases and configurations Components and Storybook React Native
+
+These examples can serve as practical references,
+
+By examining these examples, you'll gain insights into creating various components using Storybook react native
+
 ## 🤝 Contributing
 
 We welcome contributions to enhance this tutorial. Feel free to submit issues or pull requests.
@@ -474,73 +734,9 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - React Native community for their ongoing support
 
 
-## 🚧 Work in Progress
-
-This guide is currently under construction. Check back soon for updates and new content!
 
 Happy coding! 🎉
-<!-- 
-1.  **Create the application.**
 
-    Use [degit](https://github.com/Rich-Harris/degit) to get this template.
+<!-- ## 🚧 Work in Progress
 
-    ```shell
-    # Clone the template
-    npx degit chromaui/intro-storybook-react-native-template#main taskbox
-    ```
-
-1.  **Install the dependencies.**
-
-    Navigate into your new site’s directory and install the necessary dependencies.
-
-    ```shell
-    # Navigate to the directory
-    cd taskbox/
-
-    # Install the dependencies
-    yarn
-    ```
-
-1.  **Open the source code and start editing!**
-
-    Open the `taskbox` directory in your code editor of choice and building your first component!
-
-1.  **Browse your stories!**
-
-    Run `yarn storybook:ios` for ios or `yarn storybook:android` for android to see your component's stories on your emulator or device.
-
-## 🔎 What's inside?
-
-A quick look at the top-level files and directories included with this template.
-
-    .
-    ├── .gitignore
-    ├── LICENSE
-    ├── README.md
-    ├── App.jsx
-    ├── app.config.js
-    ├── yarn.lock
-    ├── package.json
-    ├── babel.config.js
-
-1.  **`.gitignore`**: This file tells git which files it should not track or maintain during the development process of your project.
-
-2.  **`LICENSE`**: The template is licensed under the MIT licence.
-
-3.  **`README.md`**: A text file containing useful reference information about the project.
-
-4. **`App.jsx`**: This is the entry point of your app.  
-
-5. **`app.config.js`**: This is the configuration file for Expo that allows you to customize your app.
-
-6. **`yarn.lock`**: This is an automatically generated file based on the exact versions of your npm dependencies that were installed.
-
-## Contribute
-
-If you encounter an issue with the template, we encourage you to open an issue in this template's repository.
-
-## Learning Storybook
-
-1. Read our introductory tutorial at [Learn Storybook](https://storybook.js.org/tutorials/intro-to-storybook/react-native/en/get-started/).
-2. Learn how to transform your component libraries into design systems in our [Design Systems for Developers](https://storybook.js.org/tutorials/design-systems-for-developers/) tutorial.
-3. See our official documentation at [Storybook](https://storybook.js.org/). -->
+This guide is currently under construction. Check back soon for updates and new content! -->

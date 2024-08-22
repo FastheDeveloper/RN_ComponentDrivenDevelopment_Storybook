@@ -16,7 +16,7 @@ const InputField = ({ leftIcon, label, rightIcon, ...inputProps }: buttonProps) 
 
       <View className="flex-row justify-between items-center bg-APP_COLOR-MAIN_WHITE w-full  mt-2 rounded-xl shadow-xl border border-APP_COLOR-MAIN_GREY ">
         {leftIcon && (
-          <View className="ml-2">
+          <View className="ml-2" testID="left-icon">
             <FontAwesome name={leftIcon} size={20} />
           </View>
         )}
@@ -25,11 +25,12 @@ const InputField = ({ leftIcon, label, rightIcon, ...inputProps }: buttonProps) 
           className={`h-[52px] w-[85%] px-[2%]  `}
           {...inputProps}
           secureTextEntry={inputProps.secureTextEntry && !rightIcon ? hide : undefined}
+          testID="text-input"
         />
 
         {(rightIcon || inputProps.secureTextEntry) && (
-          <View className="mr-2">
-            <Pressable onPress={() => (rightIcon ? null : setHide(!hide))}>
+          <View className="mr-2" testID="right-icon">
+            <Pressable onPress={() => (rightIcon ? null : setHide(!hide))} testID="passwordTest">
               <FontAwesome
                 name={rightIcon || (inputProps.secureTextEntry && (hide ? 'eye' : 'eye-slash')) || undefined}
                 size={20}
