@@ -51,6 +51,7 @@ Before diving in, make sure you have:
    - Writing Jest Tests for the TextInput Component
 6. **Testing Your Components**
 7. **More Component Examples**
+8. **Implementing the TextInput and Button Component**
 
 ## Introduction to Component-Driven Development in React Native
 
@@ -245,14 +246,13 @@ To quickly get started with the pre-configured environment, follow these steps:
         import { FontAwesome } from '@expo/vector-icons'
 
         type buttonProps = {
-        disabled?: boolean
         loading?: boolean
         rightIcon?: keyof typeof FontAwesome.glyphMap
         leftIcon?: keyof typeof FontAwesome.glyphMap
         label: string
         } & ComponentProps<typeof Pressable>
 
-        const AppButton = ({ disabled, loading, leftIcon, label, rightIcon, ...pressableProps }: buttonProps) => {
+        const AppButton = ({  loading, leftIcon, label, rightIcon, ...pressableProps }: buttonProps) => {
         const content = loading ? (
             <>
             <View
@@ -678,7 +678,7 @@ In this example, we create a new default story, which tells Storybook that:
 
 ```
 
-## Testing
+### Testing
 
 This component is tested using Jest and React Native Testing Library. The tests cover various aspects of the InputField component's functionality:
 
@@ -718,6 +718,95 @@ For a more comprehensive understanding of how to use this component and to explo
 These examples can serve as practical references,
 
 By examining these examples, you'll gain insights into creating various components using Storybook react native
+
+## Building a Basic Sign-Up Screen with Our Components
+
+```javascript
+            import { Text, View } from 'react-native'
+            import React, { useState } from 'react'
+            import InputField from '@/components/InputField/InputField'
+            import AppButton from '@/components/Button/AppButton'
+            import { validateEmail, passwordsMatch, allFieldsFilled } from '../utils/Validators'
+
+            export interface UserDetails {
+            name: string
+            email: string
+            password: string
+            confirmPassword: string
+            }
+
+            const initialUserDetails: UserDetails = {
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            }
+
+            const SignupScreen = () => {
+            const [userDetails, setUserDetails] = useState<UserDetails>(initialUserDetails)
+
+            const handleChange = (name: keyof UserDetails, value: string) => {
+                setUserDetails((prevDetails) => ({
+                ...prevDetails,
+                [name]: value,
+                }))
+            }
+
+            const isFormValid = () => {
+                return (
+                validateEmail(userDetails.email) &&
+                passwordsMatch(userDetails.password, userDetails.confirmPassword) &&
+                allFieldsFilled(userDetails)
+                )
+            }
+            return (
+                <View className=" flex-1 mx-4">
+                <View className=" items-center  ">
+                    <Text className="text-lg text-[#212529] font-bold text-2xl">Let's Gets Signed Up</Text>
+                    <Text className="text-[#A3AAB0]"> Create a new account</Text>
+                </View>
+                <View>
+                    <InputField
+                    leftIcon="user-o"
+                    placeholder="Enter your name"
+                    onChangeText={(text) => handleChange('name', text)}
+                    />
+                    <InputField
+                    leftIcon="envelope-o"
+                    placeholder="Enter your email"
+                    rightIcon={validateEmail(userDetails.email) ? 'check' : undefined}
+                    onChangeText={(text) => handleChange('email', text)}
+                    />
+
+                    <InputField
+                    leftIcon="lock"
+                    placeholder="Enter your Password"
+                    secureTextEntry
+                    onChangeText={(text) => handleChange('password', text)}
+                    />
+                    <InputField
+                    leftIcon="lock"
+                    placeholder="Re-Enter your Password"
+                    secureTextEntry
+                    onChangeText={(text) => handleChange('confirmPassword', text)}
+                    />
+                </View>
+                <View className="flex-1 justify-end mx-2">
+                    <AppButton label="Sign Up" disabled={!isFormValid()} />
+                </View>
+                </View>
+            )
+            }
+
+            export default SignupScreen
+
+```
+
+This basic usage demonstrates how component-driven development with Storybook enhances the reusability of components that are created in isolation and tested with Jest. It provides confidence in their performance and functionality, showcasing the benefits of using Storybook for building and validating components.
+
+  <video width="320" height="100%" controls>
+        <source src="./tutorialMedia/UI.mp4" type="video/mp4">     
+    </video>
 
 ## 🤝 Contributing
 
