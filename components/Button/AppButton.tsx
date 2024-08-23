@@ -4,19 +4,18 @@ import { APP_COLOR } from '@constants/colorConstants'
 import { FontAwesome } from '@expo/vector-icons'
 
 type buttonProps = {
-  disabled?: boolean
   loading?: boolean
   rightIcon?: keyof typeof FontAwesome.glyphMap
   leftIcon?: keyof typeof FontAwesome.glyphMap
   label: string
 } & ComponentProps<typeof Pressable>
 
-const AppButton = ({ disabled, loading, leftIcon, label, rightIcon, ...pressableProps }: buttonProps) => {
+const AppButton = ({ loading, leftIcon, label, rightIcon, ...pressableProps }: buttonProps) => {
   const content = loading ? (
     <>
       <View
         // style={styles.loaderWrapper}
-        className="justify-center h-6"
+        className="justify-center h-7"
       >
         <ActivityIndicator size="small" color={'white'} animating={true} />
       </View>
@@ -50,7 +49,9 @@ const AppButton = ({ disabled, loading, leftIcon, label, rightIcon, ...pressable
   return (
     <Pressable
       // style={styles.button}
-      className="w-full flex justify-center  item-center bg-APP_COLOR-MAIN_GREEN rounded-3xl p-4 shadow-lg"
+      className={`w-full flex justify-center  item-center  rounded-3xl p-4 shadow-lg ${
+        pressableProps.disabled ? 'bg-APP_COLOR-ACCENT_GREEN' : 'bg-APP_COLOR-MAIN_GREEN'
+      }`}
       {...pressableProps}
       testID="testClick"
     >
