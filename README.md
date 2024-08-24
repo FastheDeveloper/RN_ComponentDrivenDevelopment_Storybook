@@ -397,10 +397,10 @@ In this example, we create a new default story, which tells Storybook that:
 - The default loading state should be false
 - The onPress action should run the 'pressed the button' action
 
-    <video width="320" height="100%" controls>
+    <!-- <video width="320" height="100%" controls>
         <source src="./tutorialMedia/ButtonStory.mp4" type="video/mp4">     
-    </video>
-
+    </video> -->
+[Watch the video](https://vimeo.com/1001890166)
 ### Creating Various Button Stories
 
 ```javascript
@@ -458,9 +458,11 @@ In this example, we create a new default story, which tells Storybook that:
 
 ```
 
-  <video width="320" height="100%" controls>
+  <!-- <video width="320" height="100%" controls>
         <source src="./tutorialMedia/AllButtons.mp4" type="video/mp4">     
-    </video>
+    </video> -->
+
+    [Watch Video Here](https://vimeo.com/1001894035)
 
 ### Creating the Jest Test
 
@@ -595,9 +597,11 @@ In this example, we create a new default story, which tells Storybook that:
 - The default label should be "Story Input"
 
 
-    <video width="320" height="100%" controls>
+    <!-- <video width="320" height="100%" controls>
         <source src="./tutorialMedia/DefaultText.mp4" type="video/mp4">     
-    </video>
+    </video> -->
+
+[Watch Video Here](https://vimeo.com/1001895864)
 
 ### Creating Various Textinput Stories
 ```javascript
@@ -629,10 +633,10 @@ In this example, we create a new default story, which tells Storybook that:
 ```
 
 
-- Play tutorial video
-    <video width="320" height="100%" controls>
+[Watch Video Here](https://vimeo.com/1001896713)
+    <!-- <video width="320" height="100%" controls>
         <source src="./tutorialMedia/AllTextInput.mp4" type="video/mp4">     
-    </video>
+    </video> -->
 
 ### Creating the Jest Test
 ```javascript
@@ -804,10 +808,11 @@ By examining these examples, you'll gain insights into creating various componen
 
 This basic usage demonstrates how component-driven development with Storybook enhances the reusability of components that are created in isolation and tested with Jest. It provides confidence in their performance and functionality, showcasing the benefits of using Storybook for building and validating components.
 
-  <video width="320" height="100%" controls>
+  <!-- <video width="320" height="100%" controls>
         <source src="./tutorialMedia/UI.mp4" type="video/mp4">     
-    </video>
+    </video> -->
 
+[Watch Video Here](https://vimeo.com/1001897435)
 ## 🤝 Contributing
 
 We welcome contributions to enhance this tutorial. Feel free to submit issues or pull requests.
